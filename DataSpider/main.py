@@ -51,6 +51,7 @@ def read_csv(date):
         data[columns_name].fillna(0, inplace=True)
     data.dropna(inplace=True, subset=['location_province', 'location_country', 'refresh_time'])
     data.drop(data[data['location_province'] == 'Unknown'].index)
+    data.drop(data[data['location_country'] == 'Unknown'].index)
     data.to_csv(path_or_buf='data_result.csv', index=False, sep=',',
                 columns=['location_country', 'location_province', 'refresh_time', 'daily_confirm', 'daily_death',
                          'daily_recovered'], header=False)
