@@ -65,7 +65,7 @@ def main():
         'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{}.csv'.format(
             date))
     temp = date.split('-')
-    date = temp[2] + '/' + temp[0] + '/' + temp[1]
+    date = temp[2] + '-' + temp[0] + '-' + temp[1]
     read_csv(date)
 
 
