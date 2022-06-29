@@ -10,6 +10,10 @@
 <body>
   <div id="app">Loading...</div>
   <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('sw.js')
+    }
+    
     window.$docsify = {
       loadSidebar: true,
       coverpage: true,

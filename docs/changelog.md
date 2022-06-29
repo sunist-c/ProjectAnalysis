@@ -18,8 +18,8 @@
 ## 28, Jun, 2022
 
 + Frontend
-    + charts Component
-    + map Component
+    + charts component
+    + map component
     + axios test
 + Spider
     + data spider
@@ -29,7 +29,7 @@
 + Backend
     + kafka deployment
     + http service framework
-    + log anget
+    + log agent
     + oauth middleware
 + Algorithm
     + hive implement

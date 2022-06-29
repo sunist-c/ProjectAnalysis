@@ -20,9 +20,11 @@ This contributor implement the following functions/parts:
     + Module Split
     + Project Documents
 + Backend
-    + HTTP/RPC Service
+    + HTTP Service
     + Framework Functions
     + Database and Cache System
+    + Log Agent
+    + OAuth Implement
     + Deployment
 
 ## [Jaron](https://github.com/Jaron-Jiang)

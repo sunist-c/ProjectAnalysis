@@ -43,12 +43,12 @@
 
 ## Contribution System
 
-+ 功能1: 基于OAuth2.0协议和JWT进行客户端验证与用户验证
-+ 功能2: 基于Kafka进行日志收集和消息分发
-+ 功能3: 基于gRPC协议和go-zero/go-gin框架，提供http服务，并使用Docker构建微服务集群
-+ 功能4: 基于scrapy和cron进行定期数据爬取数据，使用rpc调用大数据端进行离线数据处理
-+ 功能5: 使用redis和ClickHouse进行数据缓存
++ Client authentication and user authentication based on OAuth2.0 protocol and JWT
++ Log collection and message distribution based on Kafka
++ Based on the CeylonFramework framework, provide http services, and use Docker to build microservice clusters
++ Regular data crawling based on cron and data cleaning and data preprocessing
++ Data caching using redis and ClickHouse
 
 ## Big Data Algorithm
 
-+ 功能1: 基于爬虫数据计算并更新地图数据
++ Calculate and update map data based on crawler data
