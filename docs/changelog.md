@@ -14,3 +14,25 @@
 + Test echarts functions
 
 > Author of this change log report: [SunistC](https://www.sunist.cn)
+
+## 28, Jun, 2022
+
++ Frontend
+    + charts Component
+    + map Component
+    + axios test
++ Spider
+    + data spider
+    + data clean
+    + data pre-process
+    + data transformer
++ Backend
+    + kafka deployment
+    + http service framework
+    + log anget
+    + oauth middleware
++ Algorithm
+    + hive implement
+    + unit test
+
+> Author of this chang log report: [SunistC](https://www.sunist.cn)
