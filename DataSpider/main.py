@@ -50,6 +50,8 @@ def read_csv(date):
     for columns_name in ['daily_confirm', 'daily_death', 'daily_recovered']:
         data[columns_name].fillna(0, inplace=True)
     data.dropna(inplace=True, subset=['location_province', 'location_country', 'refresh_time'])
+    data.drop(data[data['location_province'].str.contains(',')].index, inplace=True)
+    data.drop(data[data['location_country'].str.contains(',')].index, inplace=True)
     data.drop(data[data['location_province'] == 'Unknown'].index, inplace=True)
     data.drop(data[data['location_country'] == 'Unknown'].index, inplace=True)
     data.to_csv(path_or_buf='data_result.csv', index=False, sep=',',
@@ -61,7 +63,7 @@ def main():
     if len(sys.argv) >= 2:
         date = sys.argv[1]
     else:
-        date = '01-25-2020'
+        date = '01-26-2022'
     get_page(
         'https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/{}.csv'.format(
             date))
