@@ -1,8 +1,6 @@
 package visualization
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -38,68 +36,5 @@ type MapDataResponse struct {
 
 // MapDataHandler the handler of map data interface
 func MapDataHandler(ctx *gin.Context) {
-	data := MapDataResponse{
-		BaseResponse: BaseResponse{
-			ErrorCode: 0,
-			Message:   "",
-		},
-		Data: []MapData{
-			{
-				Longitude:            0,
-				Latitude:             0,
-				LocationName:         "guangzhou",
-				LocationType:         TypeCity.toString(),
-				DailyConfirmCase:     0,
-				DailyDeathCase:       0,
-				DailyRecoveredCase:   0,
-				WeeklyConfirmCase:    0,
-				WeeklyDeathCase:      0,
-				WeeklyRecoveredCase:  0,
-				MonthlyConfirmCase:   0,
-				MonthlyDeathCase:     0,
-				MonthlyRecoveredCase: 0,
-				TotalConfirmCase:     0,
-				TotalDeathCase:       0,
-				TotalRecoveredCase:   0,
-			},
-			{
-				Longitude:            0,
-				Latitude:             0,
-				LocationName:         "united_states",
-				LocationType:         TypeCountry.toString(),
-				DailyConfirmCase:     0,
-				DailyDeathCase:       0,
-				DailyRecoveredCase:   0,
-				WeeklyConfirmCase:    0,
-				WeeklyDeathCase:      0,
-				WeeklyRecoveredCase:  0,
-				MonthlyConfirmCase:   0,
-				MonthlyDeathCase:     0,
-				MonthlyRecoveredCase: 0,
-				TotalConfirmCase:     0,
-				TotalDeathCase:       0,
-				TotalRecoveredCase:   0,
-			},
-			{
-				Longitude:            0,
-				Latitude:             0,
-				LocationName:         "beijing",
-				LocationType:         TypeProvince.toString(),
-				DailyConfirmCase:     0,
-				DailyDeathCase:       0,
-				DailyRecoveredCase:   0,
-				WeeklyConfirmCase:    0,
-				WeeklyDeathCase:      0,
-				WeeklyRecoveredCase:  0,
-				MonthlyConfirmCase:   0,
-				MonthlyDeathCase:     0,
-				MonthlyRecoveredCase: 0,
-				TotalConfirmCase:     0,
-				TotalDeathCase:       0,
-				TotalRecoveredCase:   0,
-			},
-		},
-	}
-	bytes, _ := json.Marshal(data)
-	fmt.Println(string(bytes))
+
 }

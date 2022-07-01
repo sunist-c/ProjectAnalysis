@@ -22,6 +22,8 @@ type ChartsDataRequest struct {
 
 // ChartsDataResponse the structure of charts data interface response
 type ChartsDataResponse struct {
+	BaseResponse
+	Data ChartsData `json:"data"`
 }
 
 // ChartsDataHandler the handler of charts data interface
