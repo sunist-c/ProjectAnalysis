@@ -69,15 +69,87 @@ None
 
 **Response Body**
 
-```js
+The structure of data field defined by the following code:
 
+```go
+type MapData struct {
+	Longitude            float64 `json:"longitude"`
+	Latitude             float64 `json:"latitude"`
+	LocationName         string  `json:"location_name"`
+	LocationType         string  `json:"location_type"`
+	DailyConfirmCase     int     `json:"daily_confirm_case"`
+	DailyDeathCase       int     `json:"daily_death_case"`
+	DailyRecoveredCase   int     `json:"daily_recovered_case"`
+	WeeklyConfirmCase    int     `json:"weekly_confirm_case"`
+	WeeklyDeathCase      int     `json:"weekly_death_case"`
+	WeeklyRecoveredCase  int     `json:"weekly_recovered_case"`
+	MonthlyConfirmCase   int     `json:"monthly_confirm_case"`
+	MonthlyDeathCase     int     `json:"monthly_death_case"`
+	MonthlyRecoveredCase int     `json:"monthly_recovered_case"`
+	TotalConfirmCase     int     `json:"total_confirm_case"`
+	TotalDeathCase       int     `json:"total_death_case"`
+	TotalRecoveredCase   int     `json:"total_recovered_case"`
+}
 ```
 
 **Example Response Body**
 
 ```json
 {
-  
+  "err_code": 0,
+  "msg": "",
+  "data": [{
+    "longitude": 0,
+    "latitude": 0,
+    "location_name": "guangzhou",
+    "location_type": "City",
+    "daily_confirm_case": 0,
+    "daily_death_case": 0,
+    "daily_recovered_case": 0,
+    "weekly_confirm_case": 0,
+    "weekly_death_case": 0,
+    "weekly_recovered_case": 0,
+    "monthly_confirm_case": 0,
+    "monthly_death_case": 0,
+    "monthly_recovered_case": 0,
+    "total_confirm_case": 0,
+    "total_death_case": 0,
+    "total_recovered_case": 0
+  }, {
+    "longitude": 0,
+    "latitude": 0,
+    "location_name": "united_states",
+    "location_type": "Country",
+    "daily_confirm_case": 0,
+    "daily_death_case": 0,
+    "daily_recovered_case": 0,
+    "weekly_confirm_case": 0,
+    "weekly_death_case": 0,
+    "weekly_recovered_case": 0,
+    "monthly_confirm_case": 0,
+    "monthly_death_case": 0,
+    "monthly_recovered_case": 0,
+    "total_confirm_case": 0,
+    "total_death_case": 0,
+    "total_recovered_case": 0
+  }, {
+    "longitude": 0,
+    "latitude": 0,
+    "location_name": "beijing",
+    "location_type": "Province",
+    "daily_confirm_case": 0,
+    "daily_death_case": 0,
+    "daily_recovered_case": 0,
+    "weekly_confirm_case": 0,
+    "weekly_death_case": 0,
+    "weekly_recovered_case": 0,
+    "monthly_confirm_case": 0,
+    "monthly_death_case": 0,
+    "monthly_recovered_case": 0,
+    "total_confirm_case": 0,
+    "total_death_case": 0,
+    "total_recovered_case": 0
+  }]
 }
 ```
 
@@ -126,15 +198,47 @@ None
 
 **Response Body**
 
-```js
+```go
+type ChartsPoint struct {
+	StartDate string `json:"start_date"`
+	EndDate   string `json:"end_date"`
+	Value     int    `json:"value"`
+}
 
+type ChartsData struct {
+	LocationName string        `json:"location_name"`
+	LocationType string        `json:"location_type"`
+	HistoryData  []ChartsPoint `json:"history_data"`
+}
 ```
 
 **Example Response Body**
 
 ```json
 {
-  
+  "err_code": 0,
+  "msg": "",
+  "data": {
+    "location_name": "",
+    "location_type": "",
+    "history_data": [{
+      "start_date": "2000-01-01",
+      "end_date": "2000-01-01",
+      "value": 0
+    }, {
+      "start_date": "2000-01-01",
+      "end_date": "2000-01-01",
+      "value": 0
+    }, {
+      "start_date": "2000-01-01",
+      "end_date": "2000-01-01",
+      "value": 0
+    }, {
+      "start_date": "2000-01-01",
+      "end_date": "2000-01-01",
+      "value": 0
+    }]
+  }
 }
 ```
 
@@ -182,15 +286,57 @@ None
 
 **Response Body**
 
-```js
+```go
+type OrderedPoint struct {
+	Index        int    `json:"index"`
+	LocationName string `json:"location_name"`
+	LocationType string `json:"location_type"`
+	Value        int    `json:"value"`
+}
 
+type OrderedData struct {
+	LocationName string         `json:"location_name"`
+	LocationType string         `json:"location_type"`
+	OrderedList  []OrderedPoint `json:"ordered_list"`
+}
 ```
 
 **Example Response Body**
 
 ```json
 {
-  
+  "err_code": 0,
+  "msg": "",
+  "data": {
+    "location_name": "",
+    "location_type": "",
+    "ordered_list": [
+      {
+        "index": 0,
+        "location_name": "",
+        "location_type": "",
+        "value": 0
+      },
+      {
+        "index": 0,
+        "location_name": "",
+        "location_type": "",
+        "value": 0
+      },
+      {
+        "index": 0,
+        "location_name": "",
+        "location_type": "",
+        "value": 0
+      },
+      {
+        "index": 0,
+        "location_name": "",
+        "location_type": "",
+        "value": 0
+      }
+    ]
+  }
 }
 ```
 
@@ -238,15 +384,47 @@ None
 
 **Response Body**
 
-```js
-
+```go
+type OverviewData struct {
+	LocationName         string `json:"location_name"`
+	LocationType         string `json:"location_type"`
+	DailyConfirmCase     int    `json:"daily_confirm_case"`
+	DailyDeathCase       int    `json:"daily_death_case"`
+	DailyRecoveredCase   int    `json:"daily_recovered_case"`
+	WeeklyConfirmCase    int    `json:"weekly_confirm_case"`
+	WeeklyDeathCase      int    `json:"weekly_death_case"`
+	WeeklyRecoveredCase  int    `json:"weekly_recovered_case"`
+	MonthlyConfirmCase   int    `json:"monthly_confirm_case"`
+	MonthlyDeathCase     int    `json:"monthly_death_case"`
+	MonthlyRecoveredCase int    `json:"monthly_recovered_case"`
+	TotalConfirmCase     int    `json:"total_confirm_case"`
+	TotalDeathCase       int    `json:"total_death_case"`
+	TotalRecoveredCase   int    `json:"total_recovered_case"`
+}
 ```
 
 **Example Response Body**
 
 ```json
 {
-  
+  "err_code": 0,
+  "msg": "",
+  "data": {
+    "location_name": "",
+    "location_type": "",
+    "daily_confirm_case": 0,
+    "daily_death_case": 0,
+    "daily_recovered_case": 0,
+    "weekly_confirm_case": 0,
+    "weekly_death_case": 0,
+    "weekly_recovered_case": 0,
+    "monthly_confirm_case": 0,
+    "monthly_death_case": 0,
+    "monthly_recovered_case": 0,
+    "total_confirm_case": 0,
+    "total_death_case": 0,
+    "total_recovered_case": 0
+  }
 }
 ```
 
