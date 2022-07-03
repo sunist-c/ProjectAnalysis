@@ -1,6 +1,8 @@
 package kafka
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/Shopify/sarama"
 	"testing"
 )
@@ -26,7 +28,7 @@ func TestClient_Connect(t *testing.T) {
 				connected: false,
 			},
 			args: args{cfg: ClusterConfig{
-				ServerList:  []string{""},
+				ServerList:  []string{"ceobebot.tech:9092"},
 				RequireAck:  "NoResponse",
 				Timeout:     "60",
 				Partitioner: "RandomPartitioner",
@@ -34,7 +36,7 @@ func TestClient_Connect(t *testing.T) {
 				Username:    "",
 				Password:    "",
 			}},
-			wantErr: true,
+			wantErr: false,
 		},
 		{
 			name: "test_case_failed",
@@ -43,7 +45,7 @@ func TestClient_Connect(t *testing.T) {
 				connected: false,
 			},
 			args: args{cfg: ClusterConfig{
-				ServerList:  []string{""},
+				ServerList:  []string{"ceobebot.tech:9093"},
 				RequireAck:  "NoResponse",
 				Timeout:     "60",
 				Partitioner: "RandomPartitioner",
@@ -60,6 +62,8 @@ func TestClient_Connect(t *testing.T) {
 				client:    tt.fields.client,
 				connected: tt.fields.connected,
 			}
+			bytes, _ := json.Marshal(tt.args.cfg)
+			fmt.Println(string(bytes))
 			if err := c.Connect(tt.args.cfg); (err != nil) != tt.wantErr {
 				t.Errorf("Connect() error = %v, wantErr %v", err, tt.wantErr)
 			}

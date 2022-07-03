@@ -1,6 +1,13 @@
 package visualization
 
-import "time"
+import (
+	"ProjectAnalysis/application/visualization"
+	"time"
+)
+
+var (
+	application *visualization.Application
+)
 
 // BaseResponse the common structure of response
 type BaseResponse struct {

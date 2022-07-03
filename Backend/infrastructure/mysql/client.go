@@ -28,8 +28,8 @@ func (c *Client) Connect(cfg Config) (err error) {
 }
 
 // Sync try to sync table structures between code and database
-func (c Client) Sync(opts ...interface{}) (err error) {
-	return c.connection.Sync2(opts)
+func (c Client) Sync(opt interface{}) (err error) {
+	return c.connection.Sync2(opt)
 }
 
 // Create insert records into mysql database

@@ -1,6 +1,9 @@
 package visualization
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"strings"
+)
 
 // ChartsPoint the structure of a poing in ChartsData
 type ChartsPoint struct {
@@ -28,5 +31,39 @@ type ChartsDataResponse struct {
 
 // ChartsDataHandler the handler of charts data interface
 func ChartsDataHandler(ctx *gin.Context) {
+	_location, _ := ctx.Get("location")
+	_date, _ := ctx.Get("date")
+	location, _ := _location.(string)
+	date, _ := _date.(string)
 
+	locationArr := strings.Split(location, ":")
+
+	// TODO: implement
+	// Query Country
+	if len(locationArr) == 1 {
+		_, err := application.QueryCountryData(location, date)
+		if err != nil {
+			ctx.JSON(500, BaseResponse{
+				ErrorCode: 5000,
+				Message:   err.Error(),
+			})
+		}
+
+		//history := make([]ChartsPoint, len(result))
+		//for i, value := range result {
+		//
+		//}
+
+		ctx.JSON(200, ChartsDataResponse{
+			BaseResponse: BaseResponse{
+				ErrorCode: 0,
+				Message:   "",
+			},
+			Data: ChartsData{
+				LocationName: location,
+				LocationType: TypeCountry.toString(),
+				HistoryData:  []ChartsPoint{},
+			},
+		})
+	}
 }
