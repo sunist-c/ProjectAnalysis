@@ -34,19 +34,15 @@ func (t TypeRequireAck) toString() string {
 	return string(t)
 }
 
-// NodeConfig the configuration structure of one kafka node
-type NodeConfig struct {
-	Address  string `json:"address" yaml:"address"`
-	Username string `json:"username" yaml:"username"`
-	Password string `json:"password" yaml:"password"`
-}
-
 // ClusterConfig the configuration structure of kafka cluster
 type ClusterConfig struct {
-	ServerList  []NodeConfig `json:"server_list" yaml:"server_list"`
-	RequireAck  string       `json:"require_ack" yaml:"require_ack"`
-	Timeout     string       `json:"timeout" yaml:"timeout"`
-	Partitioner string       `json:"partitioner" yaml:"partitioner"`
+	ServerList  []string `json:"server_list" yaml:"server_list"`
+	RequireAck  string   `json:"require_ack" yaml:"require_ack"`
+	Timeout     string   `json:"timeout" yaml:"timeout"`
+	Partitioner string   `json:"partitioner" yaml:"partitioner"`
+	EnableSasl  string   `json:"enable_sasl" yaml:"enable_sasl"`
+	Username    string   `json:"username" yaml:"username"`
+	Password    string   `json:"password" yaml:"password"`
 }
 
 // toPartitioner exchange the config field to partition implement
@@ -81,6 +77,7 @@ func (c ClusterConfig) toRequireAck() sarama.RequiredAcks {
 	}
 }
 
+// toTimeout exchange the config field to kafka admin timeout
 func (c ClusterConfig) toTimeout() time.Duration {
 	timeout, err := strconv.Atoi(c.Timeout)
 	if err != nil {
@@ -88,4 +85,13 @@ func (c ClusterConfig) toTimeout() time.Duration {
 	}
 
 	return time.Second * time.Duration(timeout)
+}
+
+// toEnableSasl exchange the config field to enable_sasl option
+func (c ClusterConfig) toEnableSasl() bool {
+	if c.EnableSasl == "true" || c.EnableSasl == "TRUE" {
+		return true
+	} else {
+		return false
+	}
 }
