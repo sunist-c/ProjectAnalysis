@@ -28,6 +28,7 @@ const (
 )
 
 func main() {
+	// log.Default().SetFlags(log.LstdFlags | log.Lshortfile)
 	// define config structs
 	kafkaConfig := kafka.ClusterConfig{}
 	mysqlConfig := mysql.Config{}
@@ -81,5 +82,7 @@ func main() {
 	})
 
 	// start up services
+	go application.ListenAndServe()
+	go application.TickAndServe()
 	api.StartServer(engine, application, ginConfig)
 }

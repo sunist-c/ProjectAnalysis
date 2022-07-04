@@ -20,7 +20,7 @@ type HiveProcessRequest struct {
 
 // FormatDate format date field in HiveProcessRequest from time
 func (h *HiveProcessRequest) FormatDate(t time.Time) {
-	h.Date = t.Format("2006-01-02")
+	h.Date = t.Format("2006-01-02MST")
 }
 
 // FormatData format data field in HiveProcessRequest from struct
@@ -78,7 +78,7 @@ type RequestImportData struct {
 
 // FormatRefreshTime format date field in RequestImportData from time
 func (r *RequestImportData) FormatRefreshTime(t time.Time) {
-	r.RefreshTime = t.Format("2006-01-02")
+	r.RefreshTime = t.Format("2006-01-02MST")
 }
 
 // RequestCalculateData the structure of type-country/type-province request data field

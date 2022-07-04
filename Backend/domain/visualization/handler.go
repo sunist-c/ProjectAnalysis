@@ -23,6 +23,8 @@ func SplitUuid(uuid string) (requestType, days int, origin string) {
 
 // InsertRecord insert a record into mysql database from kafka message string
 func InsertRecord(message string, client mysql.Client, redis redis.Client, callBack func(uuid string)) (ok bool, err error) {
+	log.Println("receive a message, processing")
+
 	baseResp := BaseHiveProcessResponse{}
 	err = json.Unmarshal([]byte(message), &baseResp)
 	if err != nil {
@@ -142,7 +144,7 @@ func InsertRecord(message string, client mysql.Client, redis redis.Client, callB
 // SendRequest send a message to hive via kafka
 func SendRequest(location string, request HiveProcessRequest, client kafka.ProducerClient, redis redis.Client) (uuid string, err error) {
 	requestType, _, origin := SplitUuid(request.Uuid)
-	date, _ := time.Parse("2006-01-02", request.Date)
+	date, _ := time.Parse("2006-01-02MST", request.Date)
 	cache := RequestCache{
 		Uuid:      origin,
 		Date:      request.Date,

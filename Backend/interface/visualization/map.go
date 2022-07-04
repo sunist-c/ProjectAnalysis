@@ -41,10 +41,9 @@ func MapDataHandler(ctx *gin.Context) {
 	_date, _ := ctx.Get("date")
 	location, _ := _location.(string)
 	date, _ := _date.(string)
-
+	location = strings.Trim(location, ":")
 	locationArr := strings.Split(location, ":")
 
-	// query country
 	if len(locationArr) == 1 {
 		result, err := application.QueryCountryData(location, date)
 		if err != nil {
@@ -52,6 +51,7 @@ func MapDataHandler(ctx *gin.Context) {
 				ErrorCode: 5000,
 				Message:   err.Error(),
 			})
+			return
 		}
 
 		data := make([]MapData, len(result))
@@ -75,7 +75,11 @@ func MapDataHandler(ctx *gin.Context) {
 				TotalRecoveredCase:   record.TotalRecoveredCase,
 			}
 		}
-		data[0].LocationType = TypeCountry.toString()
+
+		if len(data) == 0 {
+		} else {
+			data[0].LocationType = TypeCountry.toString()
+		}
 
 		ctx.JSON(200, MapDataResponse{
 			BaseResponse: BaseResponse{
@@ -84,5 +88,49 @@ func MapDataHandler(ctx *gin.Context) {
 			},
 			Data: data,
 		})
+		return
+	} else if len(locationArr) == 2 {
+		result, err := application.QueryProvinceData(locationArr[0], locationArr[1], date)
+		if err != nil {
+			ctx.JSON(500, BaseResponse{
+				ErrorCode: 5000,
+				Message:   err.Error(),
+			})
+			return
+		} else {
+			ctx.JSON(200, MapDataResponse{
+				BaseResponse: BaseResponse{
+					ErrorCode: 0,
+					Message:   "",
+				},
+				Data: []MapData{
+					{
+						Longitude:            0,
+						Latitude:             0,
+						LocationName:         result.LocationName,
+						LocationType:         TypeProvince.toString(),
+						DailyConfirmCase:     result.DailyConfirmCase,
+						DailyDeathCase:       result.DailyDeathCase,
+						DailyRecoveredCase:   result.DailyRecoveredCase,
+						WeeklyConfirmCase:    result.WeeklyConfirmCase,
+						WeeklyDeathCase:      result.WeeklyDeathCase,
+						WeeklyRecoveredCase:  result.WeeklyRecoveredCase,
+						MonthlyConfirmCase:   result.MonthlyConfirmCase,
+						MonthlyDeathCase:     result.MonthlyDeathCase,
+						MonthlyRecoveredCase: result.MonthlyRecoveredCase,
+						TotalConfirmCase:     result.TotalConfirmCase,
+						TotalDeathCase:       result.TotalDeathCase,
+						TotalRecoveredCase:   result.TotalRecoveredCase,
+					},
+				},
+			})
+			return
+		}
+	} else {
+		ctx.JSON(400, BaseResponse{
+			ErrorCode: 4002,
+			Message:   "bad_request: unknown location format",
+		})
+		return
 	}
 }

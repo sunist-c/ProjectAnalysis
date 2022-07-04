@@ -1,6 +1,7 @@
 package visualization
 
 import (
+	"ProjectAnalysis/application/cron"
 	"ProjectAnalysis/application/visualization"
 	"github.com/gin-gonic/gin"
 )
@@ -13,9 +14,18 @@ func StartServer(engine *gin.Engine, visualizer *visualization.Application, cfg 
 }
 
 func Bind(engine *gin.Engine) {
-	engine.Use(QueryParamMiddleware())
-	engine.GET("/map-data/:location/:date", MapDataHandler)
-	engine.GET("/charts-data/:location/:date", ChartsDataHandler)
-	engine.GET("/ordered-data/:location/:date", OrderedDataHandler)
-	engine.GET("/overview-data/:location/:date", OverviewDataHandler)
+	group := engine.Group("/")
+	group.Use(QueryParamMiddleware())
+	group.GET("/map-data/:location/:date", MapDataHandler)
+	group.GET("/charts-data/:location/:date", ChartsDataHandler)
+	group.GET("/ordered-data/:location/:date", OrderedDataHandler)
+	group.GET("/overview-data/:location/:date", OverviewDataHandler)
+	engine.GET("map-info", MapInfoHandler)
+	engine.GET("update", func(context *gin.Context) {
+		cron.LoadCsv()
+		context.JSON(200, BaseResponse{
+			ErrorCode: 0,
+			Message:   "",
+		})
+	})
 }

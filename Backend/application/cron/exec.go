@@ -22,27 +22,30 @@ func init() {
 func startTask() {
 	task := cron.New()
 	spec := "0 0 12 * *"
-	if err := task.AddFunc(spec, execSpider); err != nil {
+	if err := task.AddFunc(spec, ExecSpider); err != nil {
 		log.Fatalln(fmt.Sprintf("start cron task failed with: %v", err))
 	}
 	task.Start()
 }
 
-func execSpider() {
-	argDate := fmt.Sprintf("%v-%v-%v", time.Now().Month(), time.Now().Day(), time.Now().Year())
-	cmd := exec.Command("python", SpiderPath, argDate, DataTempPath, DataResultPath)
-	err := cmd.Run()
+func ExecSpider() {
+	argDate := time.Now().AddDate(0, 0, -1).Format("2006-01-02MST")
+	cmd := exec.Command("python3", SpiderPath, argDate, DataTempPath, DataResultPath)
+	log.Println(cmd.String())
+	bytes, err := cmd.Output()
+	log.Println(string(bytes), err)
+	err = cmd.Run()
 	if err != nil {
 		log.Println(fmt.Sprintf("cron task start spider error with: %v", err))
 	}
 
-	err = loadCsv()
+	err = LoadCsv()
 	if err != nil {
 		log.Println(fmt.Sprintf("cron task load csv-file error with: %v", err))
 	}
 }
 
-func loadCsv() (err error) {
+func LoadCsv() (err error) {
 	file, err := os.Open(DataResultPath)
 	if err != nil {
 		return err

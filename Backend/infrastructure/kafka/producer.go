@@ -4,6 +4,7 @@ import (
 	"ProjectAnalysis/infrastructure/common"
 	"errors"
 	"github.com/Shopify/sarama"
+	"log"
 	"strconv"
 )
 
@@ -45,6 +46,7 @@ func (c ProducerClient) Send(topic, message string) (uuid string, err error) {
 	msg := &sarama.ProducerMessage{}
 	msg.Topic = topic
 	msg.Value = sarama.StringEncoder(message)
+	log.Println(message)
 
 	partition, offset, err := c.client.SendMessage(msg)
 	if err == nil {
