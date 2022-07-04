@@ -1,19 +1,19 @@
-package cm.sunist.hadoop.bean;
+package cn.sunist.server.bean;
 
 import java.util.Date;
 import java.util.Objects;
 
 public class Country {
     private String countryName;
-    private Date refreshTime;
-    private Integer confirm;
-    private Integer death;
-    private Integer recovered;
+    private String refreshTime;
+    private String confirm;
+    private String death;
+    private String recovered;
 
     public Country() {
     }
 
-    public Country(String countryName, Date refreshTime, Integer confirm, Integer death, Integer recovered) {
+    public Country(String countryName, String refreshTime, String confirm, String death, String recovered) {
         this.countryName = countryName;
         this.refreshTime = refreshTime;
         this.confirm = confirm;
@@ -29,35 +29,35 @@ public class Country {
         this.countryName = countryName;
     }
 
-    public Date getRefreshTime() {
+    public String getRefreshTime() {
         return refreshTime;
     }
 
-    public void setRefreshTime(Date refreshTime) {
+    public void setRefreshTime(String refreshTime) {
         this.refreshTime = refreshTime;
     }
 
-    public Integer getConfirm() {
+    public String getConfirm() {
         return confirm;
     }
 
-    public void setConfirm(Integer confirm) {
+    public void setConfirm(String confirm) {
         this.confirm = confirm;
     }
 
-    public Integer getDeath() {
+    public String getDeath() {
         return death;
     }
 
-    public void setDeath(Integer death) {
+    public void setDeath(String death) {
         this.death = death;
     }
 
-    public Integer getRecovered() {
+    public String getRecovered() {
         return recovered;
     }
 
-    public void setRecovered(Integer recovered) {
+    public void setRecovered(String recovered) {
         this.recovered = recovered;
     }
 
@@ -65,8 +65,8 @@ public class Country {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Country that = (Country) o;
-        return Objects.equals(countryName, that.countryName) && Objects.equals(refreshTime, that.refreshTime) && Objects.equals(confirm, that.confirm) && Objects.equals(death, that.death) && Objects.equals(recovered, that.recovered);
+        Country country = (Country) o;
+        return Objects.equals(countryName, country.countryName) && Objects.equals(refreshTime, country.refreshTime) && Objects.equals(confirm, country.confirm) && Objects.equals(death, country.death) && Objects.equals(recovered, country.recovered);
     }
 
     @Override
@@ -78,10 +78,10 @@ public class Country {
     public String toString() {
         return "Country{" +
                 "countryName='" + countryName + '\'' +
-                ", refreshTime=" + refreshTime +
-                ", confirm=" + confirm +
-                ", death=" + death +
-                ", recovered=" + recovered +
+                ", refreshTime='" + refreshTime + '\'' +
+                ", confirm='" + confirm + '\'' +
+                ", death='" + death + '\'' +
+                ", recovered='" + recovered + '\'' +
                 '}';
     }
 }

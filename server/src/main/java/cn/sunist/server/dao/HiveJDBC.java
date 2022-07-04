@@ -1,8 +1,10 @@
-package cm.sunist.hadoop.util;
+package cn.sunist.server.dao;
 
 
-import cm.sunist.hadoop.bean.Country;
-import cm.sunist.hadoop.bean.Data;
+import cn.sunist.server.bean.Country;
+import cn.sunist.server.bean.Data;
+import cn.sunist.server.bean.Province;
+import cn.sunist.server.util.DateFormat;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -45,10 +47,10 @@ public class HiveJDBC {
             ps = con.prepareStatement(sql);
             ps.setString(1, DateFormat.transform(date));
         }else{
-            String sql = "select location_country,location_province,sum(daily_confirm),sum(daily_death),sum(daily_recovered) from data where ? < rerefresh_time and refresh_time <= ? group by location_country,location_province";
+            String sql = "select location_country,location_province,sum(daily_confirm),sum(daily_death),sum(daily_recovered) from data where ? < refresh_time and refresh_time <= ? group by location_country,location_province";
             ps = getPreparedStatement(date, time, sql);
         }
-        return getResultSet(date, ps);
+        return getResultSetProvince(date, ps);
     }
 
     private static PreparedStatement getPreparedStatement(Date date, Integer time, String sql) throws SQLException {
@@ -69,18 +71,29 @@ public class HiveJDBC {
             ps = con.prepareStatement(sql);
             ps.setString(1, DateFormat.transform(date));
         }else{
-            String sql = "select location_country,sum(daily_confirm),sum(daily_death),sum(daily_recovered) from data where ? < rerefresh_time and refresh_time <= ? group by location_country";
+            String sql = "select location_country,sum(daily_confirm),sum(daily_death),sum(daily_recovered) from data where ? < refresh_time and refresh_time <= ? group by location_country";
             ps = getPreparedStatement(date, time, sql);
         }
-        return getResultSet(date, ps);
+        return getResultSetCountry(date, ps);
     }
 
-    private static List<Object> getResultSet(Date date, PreparedStatement ps) throws SQLException {
+    private static List<Object> getResultSetCountry(Date date, PreparedStatement ps) throws SQLException {
         ResultSet resultSet = ps.executeQuery();
         ArrayList<Object> list = new ArrayList<>();
         while (resultSet.next()){
-            Country country = new Country(resultSet.getString(1),date,Integer.valueOf(resultSet.getString(2)),Integer.valueOf(resultSet.getString(3)),Integer.valueOf(resultSet.getString(4)));
+            Country country = new Country(resultSet.getString(1),DateFormat.transform(date),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4));
             list.add(country);
+        }
+        close(ps,resultSet);
+        return list;
+    }
+
+    private static List<Object> getResultSetProvince(Date date, PreparedStatement ps) throws SQLException {
+        ResultSet resultSet = ps.executeQuery();
+        ArrayList<Object> list = new ArrayList<>();
+        while (resultSet.next()){
+            Province province = new Province(resultSet.getString(1), resultSet.getString(2), DateFormat.transform(date), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5));
+            list.add(province);
         }
         close(ps,resultSet);
         return list;

@@ -1,6 +1,6 @@
-package cm.sunist.hadoop.util;
+package cn.sunist.server.dao;
 
-import cm.sunist.hadoop.bean.Data;
+import cn.sunist.server.bean.Data;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FSDataOutputStream;
 import org.apache.hadoop.fs.FileSystem;

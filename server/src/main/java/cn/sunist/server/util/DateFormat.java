@@ -1,4 +1,4 @@
-package cm.sunist.hadoop.util;
+package cn.sunist.server.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

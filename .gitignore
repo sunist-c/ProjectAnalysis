@@ -156,3 +156,4 @@ Bin/
 bin/
 Release/
 release/
+*.md

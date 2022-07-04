@@ -1,4 +1,4 @@
-package cm.sunist.hadoop.bean;
+package cn.sunist.server.bean;
 
 import java.util.Date;
 import java.util.Objects;
@@ -6,15 +6,15 @@ import java.util.Objects;
 public class Province {
     private String countryName;
     private String provinceName;
-    private Date refreshTime;
-    private Integer confirm;
-    private Integer death;
-    private Integer recovered;
+    private String refreshTime;
+    private String confirm;
+    private String death;
+    private String recovered;
 
     public Province() {
     }
 
-    public Province(String countryName, String provinceName, Date refreshTime, Integer confirm, Integer death, Integer recovered) {
+    public Province(String countryName, String provinceName, String refreshTime, String confirm, String death, String recovered) {
         this.countryName = countryName;
         this.provinceName = provinceName;
         this.refreshTime = refreshTime;
@@ -39,35 +39,35 @@ public class Province {
         this.provinceName = provinceName;
     }
 
-    public Date getRefreshTime() {
+    public String getRefreshTime() {
         return refreshTime;
     }
 
-    public void setRefreshTime(Date refreshTime) {
+    public void setRefreshTime(String refreshTime) {
         this.refreshTime = refreshTime;
     }
 
-    public Integer getConfirm() {
+    public String getConfirm() {
         return confirm;
     }
 
-    public void setConfirm(Integer confirm) {
+    public void setConfirm(String confirm) {
         this.confirm = confirm;
     }
 
-    public Integer getDeath() {
+    public String getDeath() {
         return death;
     }
 
-    public void setDeath(Integer death) {
+    public void setDeath(String death) {
         this.death = death;
     }
 
-    public Integer getRecovered() {
+    public String getRecovered() {
         return recovered;
     }
 
-    public void setRecovered(Integer recovered) {
+    public void setRecovered(String recovered) {
         this.recovered = recovered;
     }
 
@@ -89,10 +89,10 @@ public class Province {
         return "Province{" +
                 "countryName='" + countryName + '\'' +
                 ", provinceName='" + provinceName + '\'' +
-                ", refreshTime=" + refreshTime +
-                ", confirm=" + confirm +
-                ", death=" + death +
-                ", recovered=" + recovered +
+                ", refreshTime='" + refreshTime + '\'' +
+                ", confirm='" + confirm + '\'' +
+                ", death='" + death + '\'' +
+                ", recovered='" + recovered + '\'' +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package cm.sunist.hadoop.bean;
+package cn.sunist.server.bean;
 
 import java.util.Objects;
 

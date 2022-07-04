@@ -1,25 +1,25 @@
-package cm.sunist.hadoop.bean;
+package cn.sunist.server.bean;
 
 import java.util.Objects;
 
 public class Response {
-    private Integer time;
+    private Integer date;
     private String uuid;
     private Object data;
 
-    public Response(Integer time, String uuid, Object data) {
-        this.time = time;
-        this.uuid = uuid;
-        this.data = data;
+    public Response() {
     }
 
-    public Response() {
+    public Response(Integer date, String uuid, Object data) {
+        this.date = date;
+        this.uuid = uuid;
+        this.data = data;
     }
 
     @Override
     public String toString() {
         return "Response{" +
-                "time=" + time +
+                "date=" + date +
                 ", uuid='" + uuid + '\'' +
                 ", data=" + data +
                 '}';
@@ -30,20 +30,20 @@ public class Response {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Response response = (Response) o;
-        return Objects.equals(time, response.time) && Objects.equals(uuid, response.uuid) && Objects.equals(data, response.data);
+        return Objects.equals(date, response.date) && Objects.equals(uuid, response.uuid) && Objects.equals(data, response.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(time, uuid, data);
+        return Objects.hash(date, uuid, data);
     }
 
-    public Integer getTime() {
-        return time;
+    public Integer getDate() {
+        return date;
     }
 
-    public void setTime(Integer time) {
-        this.time = time;
+    public void setDate(Integer date) {
+        this.date = date;
     }
 
     public String getUuid() {
